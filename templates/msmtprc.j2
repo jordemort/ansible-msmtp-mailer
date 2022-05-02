@@ -2,13 +2,10 @@
 
 # Default settings that all others accounts inherit
 defaults
-auth   on
-tls    on
-{% if msmtp_tls_starttls is defined %}
-tls_starttls {{msmtp_tls_starttls}}
-{% else %}
-tls_starttls   on
-{% endif %}
+auth   {{ msmtp_default_auth }}
+tls    {{ msmtp_default_tls }}
+tls_starttls   {{ msmtp_default_tls_starttls }}
+
 {% if msmtp_tls_trust_file is defined %}
 tls_trust_file {{msmtp_tls_trust_file}}
 {% else %}
@@ -46,10 +43,21 @@ set_from_header {{msmtp_set_from_header}}
 account  {{msmtp_account.account}}
 host     {{msmtp_account.host}}
 port     {{msmtp_account.port}}
-auth     {{msmtp_account.auth}}
+{% if msmtp_account.from is defined %}
 from     {{msmtp_account.from}}
+{% endif %}
+{% if msmtp_account.user is defined %}
 user     {{msmtp_account.user}}
+{% endif %}
+{% if msmtp_account.password is defined %}
 password {{msmtp_account.password}}
+{% endif %}
+{% if msmtp_account.auth is defined %}
+auth {{msmtp_account.auth}}
+{% endif %}
+{% if msmtp_account.tls is defined %}
+tls {{msmtp_account.tls}}
+{% endif %}
 {% if msmtp_account.tls_starttls is defined %}
 tls_starttls {{msmtp_account.tls_starttls}}
 {% endif %}

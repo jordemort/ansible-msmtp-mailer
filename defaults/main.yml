@@ -58,3 +58,8 @@ msmtp_set_from_header: off
 msmtprc_owner: root
 msmtprc_group: root
 msmtprc_mode: 0644
+
+## TLS settings
+msmtp_default_auth: "on"
+msmtp_default_tls: "on"
+msmtp_default_tls_starttls: "on"
